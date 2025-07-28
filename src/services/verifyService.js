@@ -24,8 +24,6 @@ export const startVerificationService = async (phone, channel) => {
 // Verificar el código recibido por el usuario
 export const checkVerificationService = async (phone, code) => {
   try {
-    
-
     const verificationCheck = await clientTwilio.verify.v2.services(verifySid)
       .verificationChecks
       .create({ to: phone, code });

@@ -12,7 +12,7 @@ export const handleIcomingMessage = async (req, res) => {
 
     if (response === "sí" || response === "si") {
       console.log(`Usuario ${From} ha confirmado la compra.`);
-      twiml.message("✅ ¡Gracias por confirmar tu compra!. Su pedido tardara entre 1 y 2 días hábiles en llegar.");
+      twiml.message("✅ ¡Gracias por confirmar tu compra!. Tu solicitud ha sido procesada.");
 
     } else if (response === "no") {
       console.log(`Usuario ${From} ha cancelado la compra.`);

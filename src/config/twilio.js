@@ -9,6 +9,8 @@ const phoneTest = process.env.TWILIO_VERIFY_TEST_PHONE;
 const verifySid = process.env.TWILIO_VERIFY_SID;
 const phoneWhatsApp = process.env.TWILIO_WHATSAPP_NUMBER;
 
+console.log("sid:", accountSid);
+
 if (!accountSid || !authToken) {
   throw new Error("Crendenciales de twilio no definidas en el archivo .env");
 }

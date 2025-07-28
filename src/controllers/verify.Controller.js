@@ -31,8 +31,6 @@ export const codeVerification = async (req, res) => {
 
   const { phone, code } = req.body;
 
-  const formatPhone = phoneTest || phone;
-
   try {
     if (!code)
       return res.status(400).json({
@@ -40,12 +38,12 @@ export const codeVerification = async (req, res) => {
           "Ingrese el código de verificación enviado a su número de celular",
       });
 
-    console.log("Verificando código para el número:", formatPhone, code);
-    const result = await checkVerificationService(formatPhone, code);
+    console.log("Verificando código para el número:", phone, code);
+    const result = await checkVerificationService(phone, code);
 
     if (result.status === "approved") {
-      addVerifiedPhone(formatPhone);
-      console.log("Código verificado correctamente para el número:", formatPhone);
+      addVerifiedPhone(phone);
+      console.log("Código verificado correctamente para el número:", phone);
       res.status(200).json({ message: "Código verificado correctamente" });
     } else {
       res.status(400).json({ message: "Código incorrecto o expirado" });

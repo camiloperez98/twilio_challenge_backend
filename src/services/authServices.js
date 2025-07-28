@@ -10,14 +10,15 @@ import jwt from "jsonwebtoken";
 
 
 export const registerUserService = async (userData) => {
- const { name, email, phone, pin } = userData;
- 
-  const fullPhoneNumber = "+57" + phone;
-  const phoneNumberWpp = "whatsapp:" + fullPhoneNumber;
+ const { name, email, phone, pin, code } = userData;
 
-//  const result = await checkVerificationService(phone, code);
+  const fullPhoneNumber = "+57" + phone;
+  // const phoneNumberWpp = "whatsapp:" + fullPhoneNumber;
+
+ const result = await checkVerificationService(fullPhoneNumber, code);
+ console.log("Resultado de verificación:", result);
 // const result = await codeVerification(phone, code);
-//  if (result.status !== "approved") throw new Error("Código de verificación incorrecto o expirado");
+ if (result.status !== "approved") throw new Error("Código de verificación incorrecto o expirado");
 
   const existingUser = await User.findOne({ where: { phone } });
   if (existingUser) throw new Error("El número de teléfono ya está registrado");
@@ -26,7 +27,7 @@ export const registerUserService = async (userData) => {
   const newUser = await User.create({ name, email, phone, pin: hashedPin, isVerified: true });
   const token = jwt.sign({ id: newUser.id }, config.JWT_SECRET, { expiresIn: "1h" });
   const welcomeMessage = `Hola ${name}, te has registrado exitosamente!.`;
-  await sendSms(fullPhoneNumber, welcomeMessage);
+  // await sendSms(fullPhoneNumber, welcomeMessage);
 
   return { token };
 };

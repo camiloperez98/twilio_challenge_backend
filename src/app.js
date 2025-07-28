@@ -8,6 +8,7 @@ import userRoutes from './routes/user.route.js';
 import verifyRoutes from './routes/verify.route.js';
 import buyRoutes from './routes/buy.route.js';
 import webHookRoutes from './routes/webHook.route.js';
+import productRoutes from './routes/product.route.js';
 
 dotenv.config();
 
@@ -23,5 +24,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/verify', verifyRoutes);
 app.use('/api/', buyRoutes);
 app.use('/api/', webHookRoutes);
+app.use('/api/', productRoutes);
 
 export default app;
